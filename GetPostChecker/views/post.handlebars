@@ -1,0 +1,33 @@
+<h1>POST Request Received</h1>
+
+{{#if queryList.length}}
+	<h3>Data</h3>
+	<table style="width: 100%">
+		<tr>
+			<th>Parameter Name</th>
+			<th>Parameter Value</th>
+		</tr>
+		{{#each queryList}}
+			<tr>
+				<td>{{this.name}}</td>
+				<td>{{this.value}}</td>
+			</tr>
+		{{/each}}
+	</table>
+{{/if}}
+
+{{#if bodyList.length}}
+	<h3>You Sent This Data Via POST Request</h3>
+	<table style="width: 100%">
+		<tr>
+			<th>Parameter Name</th>
+			<th>Parameter Value</th>
+		</tr>
+		{{#each bodyList}}
+			<tr>
+				<td>{{this.name}}</td>
+				<td>{{this.value}}</td>
+			</tr>
+		{{/each}}
+	</table>
+{{/if}}

@@ -1,0 +1,17 @@
+<h1>GET Request Received</h1>
+
+<h3>You Sent This Data Via GET Request</h3>
+<table style="width: 100%"> 
+	{{#if dataList.length}}
+		<tr>
+			<th>Parameter Name</th>
+			<th>Parameter Value</th>
+		</tr>
+	{{/if}}
+	{{#each dataList}}
+		<tr>
+			<td>{{this.name}}</td>
+			<td>{{this.value}}</td>
+		</tr>
+	{{/each}}
+</table>
