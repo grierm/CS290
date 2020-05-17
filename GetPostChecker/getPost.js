@@ -61,17 +61,3 @@ app.use(function(err, req, res, next){
 app.listen(app.get("port"), function(){
 	console.log("Express started on port " + port);
 });
-
-/*
-  }
-  "author": "Max Grier",
-  "license": "ISC",
-  "dependencies": {
-    "body-parser": "^1.16.1",
-    "express": "^4.14.1",
-    "express-handlebars": "^3.0.0",
-    "express-session": "^1.11.3",
-    "forever": "^2.0.0",
-    "mysql": "^2.8.0"
-  }
-  */
