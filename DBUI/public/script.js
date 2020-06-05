@@ -1,21 +1,22 @@
 // This adds the functionality to the add button
-document.getElementById('addExerciseButton').addEventListener('click',function(event){
-	
+document.getElementById('addButton').addEventListener('click',function(event){
+
 	// This will let us edit the form with exercises
-	var addExercise = document.getElementById("addExercise");
+	var exerciseForm = document.getElementById("exerciseForm");
 
 	// Create a new request
 	var req = new XMLHttpRequest();
 
 	// This will set all of the parameters for the GET requests
-	var parameters =    "exercise="+addExercise.elements.exercise.value+"&reps="+addExercise.elements.reps.value+
-						"&weight="+addExercise.elements.weight.value+"&date="+addExercise.elements.date.value;
+	var parameters =    "exercise="+exerciseForm.elements.exercise.value+"&reps="+exerciseForm.elements.reps.value+
+						"&weight="+exerciseForm.elements.weight.value+"&date="+exerciseForm.elements.date.value;
 	
-	// We use Kilograms by default, but if they check LBS we use that instead for units
-	if(addExercise.elements.unitCheck.checked){
-		parameters += "&unitCheck=1";
+	// Use punds if the check box is checked
+	if(exerciseForm.elements.unitMeasure.checked){
+		parameters += "&unitMeasure=1";
+	// Other wise use kilograms
 	}else{
-		parameters += "&unitCheck=0";
+		parameters += "&unitMeasure=0";
 	}
 
 	// Opens an asynchronous GET request for the insert
@@ -26,65 +27,63 @@ document.getElementById('addExerciseButton').addEventListener('click',function(e
 	req.addEventListener('load', function(){
 		// Makes sure there are no errors in the status
 		if(req.status >= 200 && req.status < 400){
-
 			// Variable to save the response
 			var response = JSON.parse(req.responseText);
 			// Create the exercise id
 			var id = response.inserted;
-
 			
-			var table = document.getElementById("exerciseTable");   //Save the table to add to it
+			// Save our exercise table that will be added to
+			var table = document.getElementById("exerciseTable");
 
-			
-			var row = table.insertRow(-1);                          //Variable so we can add to the table each time
+			// Our row so we can add to the table above
+			var row = table.insertRow(-1);
 
 			// If there isn't a name for the exercise, send error and return
-			if (addExercise.elements.exercise.value == ""){
+			if (exerciseForm.elements.exercise.value == ""){
 				console.log("Please enter a name for your exercise.");
 				return;
 			} 
-
 			// Otherwise proceed with creating the data table
 
 			// Retrieve the exercise name from the user and add to the table
 			var exerciseName = document.createElement('td');
-			exerciseName.textContent = addExercise.elements.exercise.value;
+			exerciseName.textContent = exerciseForm.elements.exercise.value;
 			row.appendChild(exerciseName);
 
 			// Retrieve the reps from the user and add to the table
 			var repAmount = document.createElement('td');
-			repAmount.textContent = addExercise.elements.reps.value;
+			repAmount.textContent = exerciseForm.elements.reps.value;
 			row.appendChild(repAmount);
 
 			// Retrieve the weight amount from the user and add to the table
 			var weightAmount = document.createElement('td');
-			weightAmount.textContent = addExercise.elements.weight.value;
+			weightAmount.textContent = exerciseForm.elements.weight.value;
 			row.appendChild(weightAmount);
 
 			// Retrieve the date the exercise is due from the user and add to the table
 			var dateToDo = document.createElement('td');
 			
 			// As long as the date isn't blank, set it as DD-MM-YYYY
-			if(addExercise.elements.date.value != ""){
+			if(exerciseForm.elements.date.value != ""){
 				// Format the date by breaking out into substrings 
-				var year = addExercise.elements.date.value.substring(0,4);
-				var day = addExercise.elements.date.value.substring(5,7);
-				var month = addExercise.elements.date.value.substring(8,10);
+				var year = exerciseForm.elements.date.value.substring(0,4);
+				var day = exerciseForm.elements.date.value.substring(5,7);
+				var month = exerciseForm.elements.date.value.substring(8,10);
 
 				// Put them together before adding it to the table
 				var formattedDate = day + "-" + month + "-" + year;
 
 				// Set the date table element to the new date format
 				dateToDo.textContent = formattedDate;
-
-				//dateToDo.textContent = addExercise.elements.date.value;
+				
+				// Add the new date to the field
 				row.appendChild(dateToDo);
 			}
 			
 			// Create element for the units
 			var unitMeasure = document.createElement('td');
 			// Use pounds if it is checked
-			if(addExercise.elements.unitCheck.checked){
+			if(exerciseForm.elements.unitMeasure.checked){
 				unitMeasure.textContent = "lbs";
 			}else{
 				// Otherwise we default to Kilograms because metric is 10x better
@@ -128,7 +127,7 @@ document.getElementById('addExerciseButton').addEventListener('click',function(e
 
 			// When the button is clicked, delete data for that id
 			deleteButton.setAttribute('onClick', 'deleteData("exerciseTable",' + id +')');
-			/////////
+			
 
 			// Hide the input to remove from the database so we can keep track of id's
 			var makeHidden = document.createElement('input');
@@ -184,10 +183,10 @@ function deleteData(tableId, id){
 	request.addEventListener("load",function(){
 		// Check if there were any errors
 		if(request.status >= 200 && request.status < 400){
-			console.log('Thats deleted!');
+			console.log('uh oh... We had an issue deleting the data');
 		// If there is one... log that there is
 		}else{
-		    console.log('uh oh... We had an issue deleting the data');
+		    console.log('Thats deleted!');
 		}
 	});
 

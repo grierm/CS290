@@ -1,8 +1,8 @@
 <h2>Add Your Favorite Exercise Below</h2>
 
-<!-- The form for entering excercises of your choice-->
-<form id="addExercise">
-    Exercise:
+<!-- The form for entering exercises of your choice-->
+<form id="exerciseForm">
+    Name:
     <input type="text" name="exercise" id="exercise">
     <br><br>
     Reps:
@@ -14,9 +14,10 @@
     Date:
     <input type="date" name="date" id="date">
     <br><br>
-    LBS:
-    <input type="checkbox" name="unitCheck" id="unitCheck"><br>
-    <input type="submit" name="Add Exercise" value="Add Exercise" id="addExerciseButton">
+    Unit (Check for pounds):
+    <input type="checkbox" name="unitMeasure" id="unitMeasure">
+    <br><br>
+    <input type="submit" name="Add Button" value="Add Button" id="addButton">
 </form><br>
 
 <!-- The data table for your favorite exercises-->
@@ -30,7 +31,8 @@
         <th>Update</th>
         <th>Delete</th>
     </tr>
-    
+
+<!-- Results for the table -->
     {{#if results}}
         {{#each results}}
             <tr>
@@ -51,5 +53,6 @@
         {{/each}}
     {{/if}}
 </table>
+
 <!-- Connect to the scipt file to run the JavaScript -->
 <script src="script.js"></script>
