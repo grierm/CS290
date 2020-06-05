@@ -1,0 +1,20 @@
+{
+    "name": "workoutDatabase",
+    "version": "1.0.0",
+    "description": "Keep track of your favorite workouts",
+    "main": "workoutDatabase.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "node workoutDatabase.js"
+    },
+    "author": "Max Grier",
+    "license": "ISC",
+    "dependencies": {
+        "express": "^4.16.2",
+        "body-parser": "^1.13.3",
+        "express-handlebars": "^3.0.0",
+        "express-session": "^1.15.6",
+        "mysql": "^2.15.0",
+        "request": "^2.83.0"
+    }
+}
